@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  showSection:string = 'Recipes';
+
+  getClickEvent(clickEvent){
+    this.showSection=clickEvent.eventType;
+  }
 }
