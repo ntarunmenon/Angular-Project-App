@@ -1,4 +1,7 @@
 import { Component, Output, EventEmitter } from "@angular/core";
+import { DataStorageService } from "../shared/datastorage.service";
+import { Http,Headers,Response } from "@angular/http";
+
 
 @Component({
     selector: 'app-header',
@@ -6,6 +9,8 @@ import { Component, Output, EventEmitter } from "@angular/core";
 })
 export class HeaderComponent{
 
+    constructor(private dataStorageService: DataStorageService){}
+    
     @Output() clickEvent = new EventEmitter<{eventType: string}>();
 
     onItemClick(clickType: string){
@@ -13,5 +18,18 @@ export class HeaderComponent{
         this.clickEvent.emit({
             eventType:clickType
         });
+    }
+
+    onSaveData(){
+        this.dataStorageService.storeRecipes()
+        .subscribe(
+            (response: Response) => {
+                console.log(response.json());
+            }
+        );
+    }
+
+    onFetchData(){
+        this.dataStorageService.getRecipes();
     }
 }
