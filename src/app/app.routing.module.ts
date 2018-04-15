@@ -10,10 +10,7 @@ import { RecipeStartComponent } from "./recipes/recipe-start/recipe-start.compon
 import { RecipesComponent } from "./recipes/recipes.component";
 
 const appRoutes: Routes=[
-    {path: '',redirectTo: '/recipes',pathMatch: 'full'},
-    {path: 'shopping-list',component: ShoppingListComponent},
-    {path: 'signup',component: SignupComponent},
-    {path: 'signin',component: SigninComponent}
+    {path: '',redirectTo: '/recipes',pathMatch: 'full'}
   ]
 @NgModule({
     imports: [RouterModule.forRoot(appRoutes)],

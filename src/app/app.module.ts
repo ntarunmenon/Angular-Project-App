@@ -25,24 +25,25 @@ import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth.guard.service';
 import { AppRoutingModule } from './app.routing.module';
 import { RecipesModule } from './recipes/recipes.module';
+import { SharedModule } from './shared/shared.module';
+import { ShoppingListModule } from './shopping-list/shopping-list-module';
+import { AuthModule } from './auth/auth.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    ShoppingListComponent,
-    ShoppingEditComponent,
-    SignupComponent,
-    SigninComponent,
-    DropdownDirective
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpModule,
-    RecipesModule
+    RecipesModule,
+    SharedModule,
+    ShoppingListModule,
+    AuthModule
   ],
   providers: [ShoppingListService,
     RecipeService,
