@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter } from "@angular/core";
 import { DataStorageService } from "../shared/datastorage.service";
 import { Http,Headers,Response } from "@angular/http";
+import { AuthService } from "../auth/auth.service";
 
 
 @Component({
@@ -9,7 +10,8 @@ import { Http,Headers,Response } from "@angular/http";
 })
 export class HeaderComponent{
 
-    constructor(private dataStorageService: DataStorageService){}
+    constructor(private dataStorageService: DataStorageService,
+    private authService:AuthService){}
     
     @Output() clickEvent = new EventEmitter<{eventType: string}>();
 
@@ -31,5 +33,9 @@ export class HeaderComponent{
 
     onFetchData(){
         this.dataStorageService.getRecipes();
+    }
+
+    onLogOut(){
+        this.authService.logout();
     }
 }

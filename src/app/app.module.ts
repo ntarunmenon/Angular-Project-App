@@ -19,41 +19,37 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecipeService } from './recipes/recipe.service';
 import { DataStorageService } from './shared/datastorage.service';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
+import { AuthService } from './auth/auth.service';
+import { AuthGuard } from './auth/auth.guard.service';
+import { AppRoutingModule } from './app.routing.module';
+import { RecipesModule } from './recipes/recipes.module';
 
-const appRoutes: Routes=[
-  {path: '',redirectTo: '/recipes',pathMatch: 'full'},
-  {path: 'recipes',
-  component: RecipesComponent,
-  children: [
-    {path: '',component: RecipeStartComponent},
-    {path: 'new',component: RecipeEditComponent},
-    {path: ':id',component: RecipeDetailComponent},
-    {path: ':id/edit',component: RecipeEditComponent}
-  ]},
-  {path: 'shopping-list',component: ShoppingListComponent}
-]
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    RecipesComponent,
-    RecipeListComponent,
-    RecipeDetailComponent,
-    RecipeItemComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
-    DropdownDirective,
-    RecipeStartComponent,
-    RecipeEditComponent
+    SignupComponent,
+    SigninComponent,
+    DropdownDirective
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes),
-    HttpModule
+    AppRoutingModule,
+    HttpModule,
+    RecipesModule
   ],
-  providers: [ShoppingListService,RecipeService,DataStorageService],
+  providers: [ShoppingListService,
+    RecipeService,
+    DataStorageService,
+    AuthService,
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
