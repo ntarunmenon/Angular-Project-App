@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter } from "@angular/core";
-import { DataStorageService } from "../shared/datastorage.service";
+import { DataStorageService } from "../../shared/datastorage.service";
 import { Http,Headers,Response } from "@angular/http";
-import { AuthService } from "../auth/auth.service";
+import { AuthService } from "../../auth/auth.service";
 
 
 @Component({
@@ -13,14 +13,6 @@ export class HeaderComponent{
     constructor(private dataStorageService: DataStorageService,
     private authService:AuthService){}
     
-    @Output() clickEvent = new EventEmitter<{eventType: string}>();
-
-    onItemClick(clickType: string){
-        console.log(clickType);
-        this.clickEvent.emit({
-            eventType:clickType
-        });
-    }
 
     onSaveData(){
         this.dataStorageService.storeRecipes()
@@ -38,4 +30,8 @@ export class HeaderComponent{
     onLogOut(){
         this.authService.logout();
     }
+
+    isAuthenticated() {
+        return this.authService.isAuthenticated();
+      }
 }
