@@ -12,7 +12,6 @@ import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-it
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { DropdownDirective } from './shared/directive.dropdown';
-import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -28,6 +27,8 @@ import { SharedModule } from './shared/shared.module';
 import { ShoppingListModule } from './shopping-list/shopping-list-module';
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
+import { StoreModule } from '@ngrx/store';
+import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { CoreModule } from './core/core.module';
     SharedModule,
     ShoppingListModule,
     AuthModule,
-    CoreModule
+    CoreModule,
+    StoreModule.forRoot({shoppingList: shoppingListReducer})
   ],
   providers: [],
   bootstrap: [AppComponent]
