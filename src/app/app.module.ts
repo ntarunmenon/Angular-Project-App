@@ -19,7 +19,6 @@ import { RecipeService } from './recipes/recipe.service';
 import { DataStorageService } from './shared/datastorage.service';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
-import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth.guard.service';
 import { AppRoutingModule } from './app.routing.module';
 import { RecipesModule } from './recipes/recipes.module';
@@ -29,7 +28,9 @@ import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { StoreModule } from '@ngrx/store';
 import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer';
-
+import {reducers} from './store/app.reducers'
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './auth/store/auth.effects';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer
     ShoppingListModule,
     AuthModule,
     CoreModule,
-    StoreModule.forRoot({shoppingList: shoppingListReducer})
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([AuthEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]
