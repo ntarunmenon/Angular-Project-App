@@ -15,8 +15,6 @@ import { DropdownDirective } from './shared/directive.dropdown';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RecipeService } from './recipes/recipe.service';
-import { DataStorageService } from './shared/datastorage.service';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { AuthGuard } from './auth/auth.guard.service';
@@ -31,6 +29,10 @@ import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer
 import {reducers} from './store/app.reducers'
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './auth/store/auth.effects';
+import {StoreRouterConnectingModule} from '@ngrx/router-store'
+import {StoreDevtoolsModule} from '@ngrx/store-devtools'
+import {environment} from './../environments/environment'
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { AuthEffects } from './auth/store/auth.effects';
     AuthModule,
     CoreModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects])
+    EffectsModule.forRoot([AuthEffects]),
+    StoreRouterConnectingModule,
+    !environment.production ? StoreDevtoolsModule.instrument():[]
   ],
   providers: [],
   bootstrap: [AppComponent]

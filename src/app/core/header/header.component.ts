@@ -1,10 +1,10 @@
 import { Component, Output, EventEmitter, OnInit } from "@angular/core";
-import { DataStorageService } from "../../shared/datastorage.service";
 import { Http,Headers,Response } from "@angular/http";
 import { Store } from "@ngrx/store";
 import * as fromApp from "../../store/app.reducers"
 import * as fromAuth from "../../auth/store/auth.reducer"
 import * as AuthActions from "../../auth/store/auth.actions"
+import * as RecipeActions from "../../recipes/store/recipe.actions"
 import { Observable } from "rxjs/Observable";
 
 @Component({
@@ -14,23 +14,18 @@ import { Observable } from "rxjs/Observable";
 export class HeaderComponent implements OnInit{
     authState: Observable<fromAuth.State>;
 
-    constructor(private dataStorageService: DataStorageService,
-    private store: Store<fromApp.AppState>){}
+    constructor(private store: Store<fromApp.AppState>){}
 
     ngOnInit(): void {
         this.authState = this.store.select('auth');
     }
     onSaveData(){
-        this.dataStorageService.storeRecipes()
-        .subscribe(
-            (response: Response) => {
-                console.log(response.json());
-            }
-        );
+        this.store.dispatch(new RecipeActions.StoreRecipes())
     }
 
     onFetchData(){
-        this.dataStorageService.getRecipes();
+      console.log("Dispatch to Store")
+      this.store.dispatch(new RecipeActions.FetchRecipes())
     }
 
     onLogOut(){

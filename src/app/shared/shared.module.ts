@@ -2,6 +2,7 @@ import { NgModel } from "@angular/forms";
 import { NgModule } from "@angular/core";
 import { DropdownDirective } from "./directive.dropdown";
 import { CommonModule } from "@angular/common";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
     declarations:[
@@ -9,7 +10,8 @@ import { CommonModule } from "@angular/common";
     ],
     exports:[
         CommonModule,
-        DropdownDirective
+        DropdownDirective,
+        HttpClientModule
     ]
 })
 export class SharedModule{
